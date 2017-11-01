@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn">
+    <div id="demo"></div>
+    <script>
+    var oBtn = document.querySelector('#btn');    
+    var oDiv = document.querySelector('#demo');
+    oBtn.onclick = function(){
+        window["fn"] = function(data){
+            oDiv.innerHTML = data.name;
+        }
+        var oScript = document.createElement('script');
+        oScript.src = "http://localhost:8888/ceshi.js";
+        document.body.appendChild(oScript);
+    }
+    //思考：我们如何提取上面的代码成一个方法?
+    // function fn(data){
+    //     // console.log(data);
+    //     oDiv.innerHTML = data.name;
+    // }
+    </script>
+    <!-- <script src="http://localhost:8888/ceshi.js"></script> -->
+</body>
+</html>

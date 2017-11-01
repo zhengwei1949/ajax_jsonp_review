@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn1">
+    <div id="demo1"></div>
+    <script>
+    function jsonp(url,successFn){
+        var fnName = "jsonp_" + (Math.random() + "").substr(2);
+        window[fnName] = function(data){
+            successFn(data);
+        }
+        var oScript = document.createElement('script');
+        oScript.src = url + "?callback="+fnName;
+        document.body.appendChild(oScript);
+    }
+
+    jsonp("http://localhost:8888/ceshi.php",function(data){
+            console.log(data.age);
+    })
+
+    jsonp("http://localhost:8888/ceshi.php",function(data){
+            console.log(data.name);
+        })
+    //思考：为什么会出现上面的情况
+    </script>
+</body>
+</html>

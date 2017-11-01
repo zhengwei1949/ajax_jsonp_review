@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn">
+    <div id="demo"></div>
+    <script>
+    // function ajax(url,type,successFn){
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open(type,url);
+    //     xhr.onreadystatechange = function(){
+    //         if(xhr.readyState === 4 && xhr.status === 200){
+    //             successFn(JSON.parse(xhr.responseText));
+    //         }
+    //     }
+    //     xhr.send();
+    // }    
+    // function jsonp(url,option,successFn){
+    //     var fnName = "jsonp_" + (Math.random() + "").substr(2);
+    //     window[fnName] = function(data){
+    //         successFn(data);
+    //     }
+    //     var oScript = document.createElement('script');
+    //     oScript.src = url + "?callback="+fnName;
+    //     for(var i in option){
+    //         oScript.src += '&' + i + '=' + option[i];
+    //     }
+    //     document.body.appendChild(oScript);
+    // }
+
+    function ajax(obj){
+        var url = obj.url;
+        var dataType = obj.dataType;
+        var type = obj.type;
+        var option = obj.option;
+        var success = obj.success;
+        if(dataType === 'json'){
+            var xhr = new XMLHttpRequest();
+            xhr.open(type,url);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    success(JSON.parse(xhr.responseText));
+                }
+            }
+            xhr.send();
+        }else if(dataType === 'jsonp'){
+                var fnName = "jsonp_" + (Math.random() + "").substr(2);
+                window[fnName] = function(data){
+                    success(data);
+                }
+                var oScript = document.createElement('script');
+                oScript.src = url + "?callback="+fnName;
+                for(var i in option){
+                    oScript.src += '&' + i + '=' + option[i];
+                }
+                document.body.appendChild(oScript);
+            }
+    }
+
+
+
+    var oBtn = document.querySelector('#btn');    
+    var oDiv = document.querySelector('#demo');
+    oBtn.onclick = function(){
+        // jsonp("http://localhost:8888/ceshi1.php",{id:0},function(data){
+        //     oDiv.innerHTML = data.name;
+        // })
+        ajax({
+            url:"http://localhost:8888/ceshi1.php",
+            option:{id:0},
+            type:'GET',
+            dataType:'jsonp',
+            success:function(data){
+                console.log(data);
+            }
+        })
+    }
+    </script>
+</body>
+</html>

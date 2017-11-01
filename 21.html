@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn">
+    <div id="demo"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script>
+    var oBtn = document.querySelector('#btn');    
+    var oDiv = document.querySelector('#demo');
+    oBtn.onclick = function(){
+        $.ajax({
+            url:"http://localhost:8888/ceshi1.php",
+            data:{id:0},
+            type:'GET',
+            dataType:'jsonp',
+            success:function(data){
+                console.log(data);
+            }
+        })
+    }
+    </script>
+</body>
+</html>

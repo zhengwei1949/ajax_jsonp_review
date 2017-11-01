@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //思考：下面的代码的结果是多少?
+    (function(){
+        var a = 1;
+        console.log(a);
+    })()
+    (function(){
+        var b = 2;
+        console.log(b);
+    })()
+    //===> ceshi.php应该修改为：echo ';'.$fnName.'('.json_encode($array).')';
+
+
+    //如果你的接口比较复杂，如ceshi1.php一样的话，需要传入其他的参数 http://localhost:8888/ceshi1.php?callback=fn&id=1
+    </script>
+</body>
+</html>

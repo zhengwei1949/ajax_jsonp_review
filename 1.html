@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //在js当中，有一个类叫XMLHttpRequest，我们通过这个类创建出来的对象
+    //可以去后台请求数据
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','./ceshi.txt');//其实这块，可以传入GET或POST，但为了简单，我们只考虑GET
+    xhr.send();
+    </script>
+</body>
+</html>

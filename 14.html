@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn">
+    <div id="demo"></div>
+    <script>
+    var oBtn = document.querySelector('#btn');    
+    var oDiv = document.querySelector('#demo');
+    // oBtn.onclick = function(){
+    //     window["fn"] = function(data){
+    //         oDiv.innerHTML = data.name;
+    //     }
+    //     var oScript = document.createElement('script');
+    //     oScript.src = "http://localhost:8888/ceshi.js";
+    //     document.body.appendChild(oScript);
+    // }
+
+    function jsonp(url,successFn){
+        window["fn"] = function(data){
+            successFn(data);
+        }
+        var oScript = document.createElement('script');
+        oScript.src = url;
+        document.body.appendChild(oScript);
+    }
+    oBtn.onclick = function(data){
+        jsonp("http://localhost:8888/ceshi.js",function(data){
+            oDiv.innerHTML = data.name;
+        })
+    }
+    </script>
+</body>
+</html>

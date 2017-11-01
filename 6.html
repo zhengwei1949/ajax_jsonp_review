@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn">
+    <div id="demo"></div>
+    <script>
+    var oBtn = document.querySelector('#btn');
+    var oDiv = document.querySelector('#demo');
+    oBtn.onclick = function(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET','./ceshi.json');
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+                console.log(xhr.responseText);
+                console.log(typeof xhr.responseText);
+            }
+        }
+        xhr.send();
+    }
+    ////获取回来的是一个字符串，我们如果拿到我们的数据呢?
+    </script>
+</body>
+</html>

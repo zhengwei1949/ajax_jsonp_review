@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn">
+    <div id="demo"></div>
+    <script>
+    var oBtn = document.querySelector('#btn');
+    var oDiv = document.querySelector('#demo');
+    // oBtn.onclick = function(){
+    //     ///////////////
+    //     //思考，这段代码有哪些是可变的?
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open('GET','./ceshi.json');
+    //     xhr.onreadystatechange = function(){
+    //         if(xhr.readyState === 4 && xhr.status === 200){
+    //             console.log(JSON.parse(xhr.responseText));
+    //         }
+    //     }
+    //     xhr.send();
+    //     ///////////////
+    // }
+    // //思考：我们如何封装上面的代码呢?
+
+
+    function ajax(url,type,successFn){
+        var xhr = new XMLHttpRequest();
+        xhr.open(type,url);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+                successFn(JSON.parse(xhr.responseText));
+            }
+        }
+        xhr.send();
+    }
+    ////如果我们想获取另一个域名下面的数据呢? index.php ---> 出现跨域的错误
+    oBtn.onclick = function(){
+        ajax('http://localhost:8888/index.php','GET',function(data){
+            console.log(data);
+        })
+    }
+    
+    </script>
+</body>
+</html>

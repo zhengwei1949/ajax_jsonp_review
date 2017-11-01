@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击获取数据" id="btn">
+    <div id="demo"></div>
+    <script>
+    function jsonp(url,option,successFn){
+        var fnName = "jsonp_" + (Math.random() + "").substr(2);
+        window[fnName] = function(data){
+            successFn(data);
+        }
+        var oScript = document.createElement('script');
+        oScript.src = url + "?callback="+fnName;
+        for(var i in option){
+            oScript.src += '&' + i + '=' + option[i];
+        }
+        document.body.appendChild(oScript);
+    }
+
+    var oBtn = document.querySelector('#btn');    
+    var oDiv = document.querySelector('#demo');
+    oBtn.onclick = function(){
+        jsonp("http://localhost:8888/ceshi1.php",{id:0},function(data){
+            oDiv.innerHTML = data.name;
+    })
+    }
+    //思考：
+    //问题一：ajax和jsonp有什么区别?
+
+
+
+
+
+    //1. ajax可以支持get和post,而jsonp只能用于get方式
+    //2. ajax不能跨域，jsonp可以实现跨域
+    //3. ajax和jsonp请求回来的数据格式是不一样的：ajax请求的是json数据，而jsonp请求回来的是一个函数的调用
+    //问题二：能不能想办法把ajax和jsonp方法合并在一起?
+
+    </script>
+</body>
+</html>
