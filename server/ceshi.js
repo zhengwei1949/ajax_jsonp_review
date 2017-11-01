@@ -1,0 +1,1 @@
+fn({"name":"xiao ming","age":20})
