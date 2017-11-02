@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击加载数据" id="btn">
+    <div id="demo">
+
+    </div>
+    <script>
+    function fn(data) {
+            console.log(data);
+        }    
+    //想办法实现当点击的时候，才去把数据拿回来 
+    var oBtn = document.querySelector('#btn');
+    oBtn.onclick = function(){
+        //DOM操作
+        var oScript = document.createElement('script');
+        oScript.src = 'http://localhost/ceshi1.js';
+        document.body.appendChild(oScript);
+    }
+    
+    </script>
+    <!-- <script src="http://localhost/ceshi1.js"></script> -->
+
+</body>
+</html>

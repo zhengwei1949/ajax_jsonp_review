@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击加载数据" id="btn">
+    <div id="demo">
+
+    </div>
+    <script>
+    var oBtn = document.querySelector('#btn');
+    var oDiv = document.querySelector('#demo');
+    oBtn.onclick = function(){
+        // 如果网比较慢的情况下， 异步
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', './a.json');//POST
+        xhr.onreadystatechange = function () {
+            // 1 2 3 4
+            if (xhr.status === 200 && xhr.readyState === 4) {
+                console.log(xhr.responseText);
+                console.log(xhr.responseText.age);
+                console.log(typeof xhr.responseText);//
+                // oDiv.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send();
+    }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击加载数据" id="btn">
+    <div id="demo">
+
+    </div>
+    <script>
+    // function ajax(type, url, success) {
+    //         var xhr = new XMLHttpRequest();
+    //         xhr.open(type, url);//POST
+    //         xhr.onreadystatechange = function () {
+    //             // 1 2 3 4
+    //             if (xhr.status === 200 && xhr.readyState === 4) {
+    //                 var obj = JSON.parse(xhr.responseText);
+    //                 // console.log(typeof obj);
+    //                 // console.log(obj.age);
+    //                 success(obj);
+    //             }
+    //         }
+    //         xhr.send();
+    //     }    
+    // function jsonp(url,data,success){
+    //     var fnName = "jsonp_" + (Math.random() + "").slice(2);
+    //     window[fnName] = function(data){
+    //         success(data);
+    //     }
+    //     var oScript = document.createElement('script');
+    //     oScript.src = url + "?callback=" + fnName;
+    //     for(var i in dara){
+    //         oScript.src = oScript.src + '&' + i + '=' + data[i];
+    //     }
+    //     document.body.appendChild(oScript);
+    // }
+
+
+
+
+
+    // function ajax(type,url,data,dataType,success){
+
+    // }
+
+
+    function ajax(obj){
+        if(obj.dataType === 'json'){
+            var xhr = new XMLHttpRequest();
+            xhr.open(obj.type, obj.url);//POST
+            xhr.onreadystatechange = function () {
+                // 1 2 3 4
+                if (xhr.status === 200 && xhr.readyState === 4) {
+                    var obj1 = JSON.parse(xhr.responseText);
+                    // console.log(typeof obj);
+                    // console.log(obj.age);
+                    obj.success(obj1);
+                }
+            }
+            xhr.send();
+        }else if(obj.dataType === 'jsonp'){
+             var fnName = "jsonp_" + (Math.random() + "").slice(2);
+            window[fnName] = function (data) {
+                obj.success(data);
+            }
+            var oScript = document.createElement('script');
+            oScript.src = obj.url + "?callback=" + fnName;
+            for (var i in obj.dara) {
+                oScript.src = oScript.src + '&' + i + '=' + data[i];
+            }
+            document.body.appendChild(oScript);
+        }
+    }
+
+    ajax({
+        type:'GET',
+        url:'http://localhost/ceshi.php',
+        data:{},
+        dataType:'jsonp',
+        success:function(data){
+            console.log(data);
+        }
+    })
+
+
+
+    ajax({
+        type:'GET',
+        url:"./a.json",
+        data:{},
+        dataType:'json',
+        success:function(data){
+            console.log(data);
+        }
+    })
+
+    </script>
+</body>
+</html>

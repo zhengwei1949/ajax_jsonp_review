@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="点击加载数据" id="btn">
+    <div id="demo">
+
+    </div>
+    <script>
+    function jsonp(url,success){
+        //因为请求回来的数据调用的是全局的函数，名字叫fn
+        window["fn"] = function(data){
+            success(data);
+        }
+        var oScript = document.createElement('script');
+        oScript.src = url;
+        document.body.appendChild(oScript);
+    }
+    // function fn(data) {
+    //         console.log(data);
+    //     }    
+    //想办法实现当点击的时候，才去把数据拿回来 
+    var oBtn = document.querySelector('#btn');
+    oBtn.onclick = function(){
+        jsonp('http://localhost/ceshi1.js',function(data){
+            console.log(data);
+        })
+    }
+    
+    </script>
+    <!-- <script src="http://localhost/ceshi1.js"></script> -->
+
+</body>
+</html>
